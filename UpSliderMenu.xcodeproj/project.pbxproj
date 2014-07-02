@@ -12,15 +12,21 @@
 		3E73CFB419643D6800A8F93C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E73CFB319643D6800A8F93C /* UIKit.framework */; };
 		3E73CFBA19643D6800A8F93C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E73CFB819643D6800A8F93C /* InfoPlist.strings */; };
 		3E73CFBC19643D6800A8F93C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73CFBB19643D6800A8F93C /* main.m */; };
-		3E73CFC019643D6800A8F93C /* RITAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73CFBF19643D6800A8F93C /* RITAppDelegate.m */; };
 		3E73CFC319643D6800A8F93C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E73CFC119643D6800A8F93C /* Main.storyboard */; };
-		3E73CFC619643D6800A8F93C /* RITViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73CFC519643D6800A8F93C /* RITViewController.m */; };
 		3E73CFC819643D6800A8F93C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E73CFC719643D6800A8F93C /* Images.xcassets */; };
 		3E73CFCF19643D6800A8F93C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E73CFCE19643D6800A8F93C /* XCTest.framework */; };
 		3E73CFD019643D6800A8F93C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E73CFAF19643D6800A8F93C /* Foundation.framework */; };
 		3E73CFD119643D6800A8F93C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E73CFB319643D6800A8F93C /* UIKit.framework */; };
 		3E73CFD919643D6800A8F93C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E73CFD719643D6800A8F93C /* InfoPlist.strings */; };
 		3E73CFDB19643D6800A8F93C /* UpSliderMenuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73CFDA19643D6800A8F93C /* UpSliderMenuTests.m */; };
+		3EA5775F196443CC007B967C /* RITAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA5775E196443CC007B967C /* RITAppDelegate.m */; };
+		3EA5776319644410007B967C /* RITViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA5776219644410007B967C /* RITViewController.m */; };
+		3EA5776C1964446E007B967C /* photo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA577661964446E007B967C /* photo1.png */; };
+		3EA5776D1964446E007B967C /* photo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA577671964446E007B967C /* photo2.png */; };
+		3EA5776E1964446E007B967C /* photo3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA577681964446E007B967C /* photo3.png */; };
+		3EA5776F1964446E007B967C /* photo4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA577691964446E007B967C /* photo4.png */; };
+		3EA577701964446E007B967C /* photo5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA5776A1964446E007B967C /* photo5.png */; };
+		3EA577711964446E007B967C /* slow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA5776B1964446E007B967C /* slow.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,17 +48,23 @@
 		3E73CFB919643D6800A8F93C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3E73CFBB19643D6800A8F93C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3E73CFBD19643D6800A8F93C /* UpSliderMenu-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UpSliderMenu-Prefix.pch"; sourceTree = "<group>"; };
-		3E73CFBE19643D6800A8F93C /* RITAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RITAppDelegate.h; sourceTree = "<group>"; };
-		3E73CFBF19643D6800A8F93C /* RITAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RITAppDelegate.m; sourceTree = "<group>"; };
 		3E73CFC219643D6800A8F93C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3E73CFC419643D6800A8F93C /* RITViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RITViewController.h; sourceTree = "<group>"; };
-		3E73CFC519643D6800A8F93C /* RITViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RITViewController.m; sourceTree = "<group>"; };
-		3E73CFC719643D6800A8F93C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3E73CFC719643D6800A8F93C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = UpSliderMenu/Images.xcassets; sourceTree = "<group>"; };
 		3E73CFCD19643D6800A8F93C /* UpSliderMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UpSliderMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E73CFCE19643D6800A8F93C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		3E73CFD619643D6800A8F93C /* UpSliderMenuTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UpSliderMenuTests-Info.plist"; sourceTree = "<group>"; };
 		3E73CFD819643D6800A8F93C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3E73CFDA19643D6800A8F93C /* UpSliderMenuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpSliderMenuTests.m; sourceTree = "<group>"; };
+		3EA5775D196443CC007B967C /* RITAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RITAppDelegate.h; path = UpSliderMenu/Classes/RITAppDelegate.h; sourceTree = "<group>"; };
+		3EA5775E196443CC007B967C /* RITAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RITAppDelegate.m; path = UpSliderMenu/Classes/RITAppDelegate.m; sourceTree = "<group>"; };
+		3EA5776119644410007B967C /* RITViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RITViewController.h; path = UpSliderMenu/Classes/Controllers/RITViewController.h; sourceTree = "<group>"; };
+		3EA5776219644410007B967C /* RITViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RITViewController.m; path = UpSliderMenu/Classes/Controllers/RITViewController.m; sourceTree = "<group>"; };
+		3EA577661964446E007B967C /* photo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo1.png; sourceTree = "<group>"; };
+		3EA577671964446E007B967C /* photo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo2.png; sourceTree = "<group>"; };
+		3EA577681964446E007B967C /* photo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo3.png; sourceTree = "<group>"; };
+		3EA577691964446E007B967C /* photo4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo4.png; sourceTree = "<group>"; };
+		3EA5776A1964446E007B967C /* photo5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo5.png; sourceTree = "<group>"; };
+		3EA5776B1964446E007B967C /* slow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slow.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +94,9 @@
 		3E73CFA319643D6800A8F93C = {
 			isa = PBXGroup;
 			children = (
-				3E73CFB519643D6800A8F93C /* UpSliderMenu */,
+				3EA5775C196443B4007B967C /* Classes */,
+				3EA577641964441C007B967C /* Resources */,
+				3E73CFB619643D6800A8F93C /* Supporting Files */,
 				3E73CFD419643D6800A8F93C /* UpSliderMenuTests */,
 				3E73CFAE19643D6800A8F93C /* Frameworks */,
 				3E73CFAD19643D6800A8F93C /* Products */,
@@ -109,20 +123,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3E73CFB519643D6800A8F93C /* UpSliderMenu */ = {
-			isa = PBXGroup;
-			children = (
-				3E73CFBE19643D6800A8F93C /* RITAppDelegate.h */,
-				3E73CFBF19643D6800A8F93C /* RITAppDelegate.m */,
-				3E73CFC119643D6800A8F93C /* Main.storyboard */,
-				3E73CFC419643D6800A8F93C /* RITViewController.h */,
-				3E73CFC519643D6800A8F93C /* RITViewController.m */,
-				3E73CFC719643D6800A8F93C /* Images.xcassets */,
-				3E73CFB619643D6800A8F93C /* Supporting Files */,
-			);
-			path = UpSliderMenu;
-			sourceTree = "<group>";
-		};
 		3E73CFB619643D6800A8F93C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +132,7 @@
 				3E73CFBD19643D6800A8F93C /* UpSliderMenu-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = UpSliderMenu;
 			sourceTree = "<group>";
 		};
 		3E73CFD419643D6800A8F93C /* UpSliderMenuTests */ = {
@@ -150,6 +151,49 @@
 				3E73CFD719643D6800A8F93C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3EA5775C196443B4007B967C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				3EA5775D196443CC007B967C /* RITAppDelegate.h */,
+				3EA5775E196443CC007B967C /* RITAppDelegate.m */,
+				3EA57760196443E1007B967C /* Controllers */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		3EA57760196443E1007B967C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3EA5776119644410007B967C /* RITViewController.h */,
+				3EA5776219644410007B967C /* RITViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		3EA577641964441C007B967C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3EA577651964446E007B967C /* Images */,
+				3E73CFC119643D6800A8F93C /* Main.storyboard */,
+				3E73CFC719643D6800A8F93C /* Images.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		3EA577651964446E007B967C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3EA577661964446E007B967C /* photo1.png */,
+				3EA577671964446E007B967C /* photo2.png */,
+				3EA577681964446E007B967C /* photo3.png */,
+				3EA577691964446E007B967C /* photo4.png */,
+				3EA5776A1964446E007B967C /* photo5.png */,
+				3EA5776B1964446E007B967C /* slow.png */,
+			);
+			name = Images;
+			path = UpSliderMenu/Resources/Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,8 +273,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EA5776F1964446E007B967C /* photo4.png in Resources */,
+				3EA5776D1964446E007B967C /* photo2.png in Resources */,
+				3EA577711964446E007B967C /* slow.png in Resources */,
+				3EA5776C1964446E007B967C /* photo1.png in Resources */,
 				3E73CFC819643D6800A8F93C /* Images.xcassets in Resources */,
+				3EA577701964446E007B967C /* photo5.png in Resources */,
 				3E73CFBA19643D6800A8F93C /* InfoPlist.strings in Resources */,
+				3EA5776E1964446E007B967C /* photo3.png in Resources */,
 				3E73CFC319643D6800A8F93C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,9 +300,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E73CFC019643D6800A8F93C /* RITAppDelegate.m in Sources */,
+				3EA5776319644410007B967C /* RITViewController.m in Sources */,
 				3E73CFBC19643D6800A8F93C /* main.m in Sources */,
-				3E73CFC619643D6800A8F93C /* RITViewController.m in Sources */,
+				3EA5775F196443CC007B967C /* RITAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +339,7 @@
 				3E73CFC219643D6800A8F93C /* Base */,
 			);
 			name = Main.storyboard;
+			path = UpSliderMenu;
 			sourceTree = "<group>";
 		};
 		3E73CFD719643D6800A8F93C /* InfoPlist.strings */ = {
@@ -457,6 +508,7 @@
 				3E73CFE019643D6800A8F93C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3E73CFE119643D6800A8F93C /* Build configuration list for PBXNativeTarget "UpSliderMenuTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +517,7 @@
 				3E73CFE319643D6800A8F93C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

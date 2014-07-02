@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RITViewController : UIViewController
+@interface RITViewController : UIViewController  <UIScrollViewDelegate>
+
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 
 @end
