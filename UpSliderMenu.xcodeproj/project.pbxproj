@@ -23,24 +23,12 @@
 		3EA5776F1964446E007B967C /* photo4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA577691964446E007B967C /* photo4.png */; };
 		3EA577701964446E007B967C /* photo5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA5776A1964446E007B967C /* photo5.png */; };
 		3EA577711964446E007B967C /* slow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA5776B1964446E007B967C /* slow.png */; };
+		A2A173EB1965CCF000DFD3E9 /* RITPagedScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A173EA1965CCF000DFD3E9 /* RITPagedScrollViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3E37972C1965964400D0A198 /* RITCustomScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RITCustomScrollViewController.h; path = UpSliderMenu/Classes/Controllers/RITCustomScrollViewController.h; sourceTree = "<group>"; };
 		3E37972D1965964400D0A198 /* RITCustomScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RITCustomScrollViewController.m; path = UpSliderMenu/Classes/Controllers/RITCustomScrollViewController.m; sourceTree = "<group>"; };
-		3E3797391965983000D0A198 /* UpSliderMenuiPad-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UpSliderMenuiPad-Info.plist"; sourceTree = "<group>"; };
-		3E37973B1965983000D0A198 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3E37973D1965983000D0A198 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3E37973F1965983000D0A198 /* UpSliderMenuiPad-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UpSliderMenuiPad-Prefix.pch"; sourceTree = "<group>"; };
-		3E3797401965983000D0A198 /* RITAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RITAppDelegate.h; sourceTree = "<group>"; };
-		3E3797411965983000D0A198 /* RITAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RITAppDelegate.m; sourceTree = "<group>"; };
-		3E3797441965983000D0A198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3E3797461965983000D0A198 /* RITViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RITViewController.h; sourceTree = "<group>"; };
-		3E3797471965983000D0A198 /* RITViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RITViewController.m; sourceTree = "<group>"; };
-		3E3797491965983000D0A198 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		3E3797571965983000D0A198 /* UpSliderMenuiPadTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UpSliderMenuiPadTests-Info.plist"; sourceTree = "<group>"; };
-		3E3797591965983000D0A198 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3E37975B1965983000D0A198 /* UpSliderMenuiPadTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpSliderMenuiPadTests.m; sourceTree = "<group>"; };
 		3E73CFAC19643D6800A8F93C /* UpSliderMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UpSliderMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E73CFAF19643D6800A8F93C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3E73CFB119643D6800A8F93C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -65,6 +53,8 @@
 		3EA577691964446E007B967C /* photo4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo4.png; sourceTree = "<group>"; };
 		3EA5776A1964446E007B967C /* photo5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo5.png; sourceTree = "<group>"; };
 		3EA5776B1964446E007B967C /* slow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slow.png; sourceTree = "<group>"; };
+		A2A173E91965CCF000DFD3E9 /* RITPagedScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RITPagedScrollViewController.h; path = UpSliderMenu/Classes/Controllers/RITPagedScrollViewController.h; sourceTree = "<group>"; };
+		A2A173EA1965CCF000DFD3E9 /* RITPagedScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RITPagedScrollViewController.m; path = UpSliderMenu/Classes/Controllers/RITPagedScrollViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,49 +71,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3E3797371965983000D0A198 /* UpSliderMenuiPad */ = {
-			isa = PBXGroup;
-			children = (
-				3E3797401965983000D0A198 /* RITAppDelegate.h */,
-				3E3797411965983000D0A198 /* RITAppDelegate.m */,
-				3E3797431965983000D0A198 /* Main.storyboard */,
-				3E3797461965983000D0A198 /* RITViewController.h */,
-				3E3797471965983000D0A198 /* RITViewController.m */,
-				3E3797491965983000D0A198 /* Images.xcassets */,
-				3E3797381965983000D0A198 /* Supporting Files */,
-			);
-			path = UpSliderMenuiPad;
-			sourceTree = "<group>";
-		};
-		3E3797381965983000D0A198 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3E3797391965983000D0A198 /* UpSliderMenuiPad-Info.plist */,
-				3E37973A1965983000D0A198 /* InfoPlist.strings */,
-				3E37973D1965983000D0A198 /* main.m */,
-				3E37973F1965983000D0A198 /* UpSliderMenuiPad-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3E3797551965983000D0A198 /* UpSliderMenuiPadTests */ = {
-			isa = PBXGroup;
-			children = (
-				3E37975B1965983000D0A198 /* UpSliderMenuiPadTests.m */,
-				3E3797561965983000D0A198 /* Supporting Files */,
-			);
-			path = UpSliderMenuiPadTests;
-			sourceTree = "<group>";
-		};
-		3E3797561965983000D0A198 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3E3797571965983000D0A198 /* UpSliderMenuiPadTests-Info.plist */,
-				3E3797581965983000D0A198 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		3E73CFA319643D6800A8F93C = {
 			isa = PBXGroup;
 			children = (
@@ -131,8 +78,6 @@
 				3EA577641964441C007B967C /* Resources */,
 				3E73CFB619643D6800A8F93C /* Supporting Files */,
 				3E73CFD419643D6800A8F93C /* UpSliderMenuTests */,
-				3E3797371965983000D0A198 /* UpSliderMenuiPad */,
-				3E3797551965983000D0A198 /* UpSliderMenuiPadTests */,
 				3E73CFAE19643D6800A8F93C /* Frameworks */,
 				3E73CFAD19643D6800A8F93C /* Products */,
 			);
@@ -204,6 +149,8 @@
 				3E37972D1965964400D0A198 /* RITCustomScrollViewController.m */,
 				3EA5776119644410007B967C /* RITViewController.h */,
 				3EA5776219644410007B967C /* RITViewController.m */,
+				A2A173E91965CCF000DFD3E9 /* RITPagedScrollViewController.h */,
+				A2A173EA1965CCF000DFD3E9 /* RITPagedScrollViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -306,6 +253,7 @@
 			files = (
 				3EA5776319644410007B967C /* RITViewController.m in Sources */,
 				3E73CFBC19643D6800A8F93C /* main.m in Sources */,
+				A2A173EB1965CCF000DFD3E9 /* RITPagedScrollViewController.m in Sources */,
 				3E3797641965ACE900D0A198 /* RITCustomScrollViewController.m in Sources */,
 				3EA5775F196443CC007B967C /* RITAppDelegate.m in Sources */,
 			);
@@ -314,30 +262,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3E37973A1965983000D0A198 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3E37973B1965983000D0A198 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		3E3797431965983000D0A198 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3E3797441965983000D0A198 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3E3797581965983000D0A198 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3E3797591965983000D0A198 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		3E73CFB819643D6800A8F93C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
