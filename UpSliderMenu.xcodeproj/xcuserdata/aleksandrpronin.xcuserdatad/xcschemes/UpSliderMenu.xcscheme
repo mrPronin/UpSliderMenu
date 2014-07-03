@@ -38,6 +38,16 @@
                ReferencedContainer = "container:UpSliderMenu.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3E37974E1965983000D0A198"
+               BuildableName = "UpSliderMenuiPadTests.xctest"
+               BlueprintName = "UpSliderMenuiPadTests"
+               ReferencedContainer = "container:UpSliderMenu.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
