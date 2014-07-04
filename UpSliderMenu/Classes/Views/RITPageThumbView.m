@@ -51,6 +51,13 @@
     
 }
 
+- (NSString*) description
+{
+    
+    return [NSString stringWithFormat:@"%@ label=%@", [super description], _label.text];
+    
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -17,8 +17,9 @@ const NSInteger pageCount = 20;
 @property (assign, nonatomic) CGRect initialFrame;
 
 - (void)loadVisiblePages;
-- (void)loadPage:(NSInteger)page;
+- (UIView*)loadPage:(NSInteger)page;
 - (void)purgePage:(NSInteger)page;
+- (NSArray*) getVisiblePagesWithContentOffset:(CGPoint) offset;
 
 @end
 
@@ -65,13 +66,39 @@ const NSInteger pageCount = 20;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Methods
+
+- (NSArray*) getVisiblePagesWithContentOffset:(CGPoint) offset
+{
+    NSMutableArray *pages = [NSMutableArray array];
+    CGFloat pageWidth = _initialFrame.size.width;
+    
+    // Determine number of hidden pages for left and right sides
+    CGFloat leftPagesCount = offset.x / pageWidth;
+    CGFloat rightPagesCount = (offset.x + self.scrollView.frame.size.width) / pageWidth;
+    
+    // Work out which pages you want to load
+    NSInteger firstPage = floor(leftPagesCount);
+    NSInteger lastPage = ceil(rightPagesCount) - 1;
+    for (NSInteger i=firstPage; i<=lastPage; i++) {
+        
+        RITPageThumbView *pageView = (RITPageThumbView*)[self loadPage:i];
+        if (pageView) {
+            
+            [pages addObject:pageView];
+        }
+    }
+    
+    return pages;
+}
+
 - (void)loadVisiblePages {
     // First, determine which page is currently visible
     CGFloat pageWidth = _initialFrame.size.width;
     //NSInteger page = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + pageWidth) / (pageWidth * 2.0f));
     //NSInteger page = 0;
     
-    // Determine number of pages hidden in left side
+    // Determine number of hidden pages for left and right sides
     CGFloat leftPagesCount = self.scrollView.contentOffset.x / pageWidth;
     CGFloat rightPagesCount = (self.scrollView.contentOffset.x + self.scrollView.frame.size.width) / pageWidth;
     
@@ -105,11 +132,12 @@ const NSInteger pageCount = 20;
     }
 }
 
-- (void)loadPage:(NSInteger)page {
+- (UIView*)loadPage:(NSInteger)page
+{
     
     if (page < 0 || page >= pageCount) {
         // If it's outside the range of what we have to display, then do nothing
-        return;
+        return nil;
     }
     
     // Load an individual page, first checking if you've already loaded it
@@ -124,7 +152,9 @@ const NSInteger pageCount = 20;
         
         [self.scrollView addSubview:newPageView];
         [self.pageViews replaceObjectAtIndex:page withObject:newPageView];
+        pageView = newPageView;
     }
+    return pageView;
 }
 
 - (void)purgePage:(NSInteger)page {
@@ -148,6 +178,57 @@ const NSInteger pageCount = 20;
     [self loadVisiblePages];
 }
 
+- (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    
+    NSLog(@"scrollViewWillBeginDragging contentOffset: %f", scrollView.contentOffset.x);
+    NSLog(@"\n");
+    
+}
 
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    
+    NSLog(@"scrollViewWillEndDragging contentOffset: %f", scrollView.contentOffset.x);
+    CGPoint point = *targetContentOffset;
+    NSLog(@"velocity: %@, %f", NSStringFromCGPoint(velocity), point.x);
+    
+    NSArray *array = [self getVisiblePagesWithContentOffset:point];
+    NSLog(@"views: %@", array);
+    NSLog(@"\n");
+}
+
+- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    
+    NSLog(@"scrollViewDidEndDragging contentOffset: %f", scrollView.contentOffset.x);
+    NSLog(@"decelerate: %d", decelerate);
+    NSLog(@"\n");
+    
+}
+
+- (void) scrollViewDidScrollToTop:(UIScrollView *)scrollView
+{
+    
+    NSLog(@"scrollViewDidScrollToTop contentOffset: %f", scrollView.contentOffset.x);
+    NSLog(@"\n");
+    
+}
+
+- (void) scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    
+    NSLog(@"scrollViewWillBeginDecelerating contentOffset: %f", scrollView.contentOffset.x);
+    NSLog(@"\n");
+    
+}
+
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    
+    NSLog(@"scrollViewDidEndDecelerating contentOffset: %f", scrollView.contentOffset.x);
+    NSLog(@"\n");
+    
+}
 
 @end
