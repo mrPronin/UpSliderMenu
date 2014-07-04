@@ -23,6 +23,8 @@
 		3EA5776F1964446E007B967C /* photo4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA577691964446E007B967C /* photo4.png */; };
 		3EA577701964446E007B967C /* photo5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA5776A1964446E007B967C /* photo5.png */; };
 		3EA577711964446E007B967C /* slow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA5776B1964446E007B967C /* slow.png */; };
+		3EBF1B7B1966BF1F00806AEF /* RITMenuScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF1B7A1966BF1F00806AEF /* RITMenuScrollViewController.m */; };
+		3EBF1B7F196710E900806AEF /* RITPageThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF1B7E196710E900806AEF /* RITPageThumbView.m */; };
 		3EF0AB651966A6E9002E39DE /* RITPeekPagedScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF0AB641966A6E9002E39DE /* RITPeekPagedScrollViewController.m */; };
 		A2A173EB1965CCF000DFD3E9 /* RITPagedScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A173EA1965CCF000DFD3E9 /* RITPagedScrollViewController.m */; };
 /* End PBXBuildFile section */
@@ -54,6 +56,10 @@
 		3EA577691964446E007B967C /* photo4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo4.png; sourceTree = "<group>"; };
 		3EA5776A1964446E007B967C /* photo5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo5.png; sourceTree = "<group>"; };
 		3EA5776B1964446E007B967C /* slow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slow.png; sourceTree = "<group>"; };
+		3EBF1B791966BF1F00806AEF /* RITMenuScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RITMenuScrollViewController.h; path = UpSliderMenu/Classes/Controllers/RITMenuScrollViewController.h; sourceTree = "<group>"; };
+		3EBF1B7A1966BF1F00806AEF /* RITMenuScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RITMenuScrollViewController.m; path = UpSliderMenu/Classes/Controllers/RITMenuScrollViewController.m; sourceTree = "<group>"; };
+		3EBF1B7D196710E900806AEF /* RITPageThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RITPageThumbView.h; path = UpSliderMenu/Classes/Views/RITPageThumbView.h; sourceTree = "<group>"; };
+		3EBF1B7E196710E900806AEF /* RITPageThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RITPageThumbView.m; path = UpSliderMenu/Classes/Views/RITPageThumbView.m; sourceTree = "<group>"; };
 		3EF0AB631966A6E9002E39DE /* RITPeekPagedScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RITPeekPagedScrollViewController.h; path = UpSliderMenu/Classes/Controllers/RITPeekPagedScrollViewController.h; sourceTree = "<group>"; };
 		3EF0AB641966A6E9002E39DE /* RITPeekPagedScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RITPeekPagedScrollViewController.m; path = UpSliderMenu/Classes/Controllers/RITPeekPagedScrollViewController.m; sourceTree = "<group>"; };
 		A2A173E91965CCF000DFD3E9 /* RITPagedScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RITPagedScrollViewController.h; path = UpSliderMenu/Classes/Controllers/RITPagedScrollViewController.h; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 			children = (
 				3EA5775D196443CC007B967C /* RITAppDelegate.h */,
 				3EA5775E196443CC007B967C /* RITAppDelegate.m */,
+				3EBF1B7C1967104000806AEF /* Views */,
 				3EA57760196443E1007B967C /* Controllers */,
 			);
 			name = Classes;
@@ -156,6 +163,8 @@
 				A2A173EA1965CCF000DFD3E9 /* RITPagedScrollViewController.m */,
 				3EF0AB631966A6E9002E39DE /* RITPeekPagedScrollViewController.h */,
 				3EF0AB641966A6E9002E39DE /* RITPeekPagedScrollViewController.m */,
+				3EBF1B791966BF1F00806AEF /* RITMenuScrollViewController.h */,
+				3EBF1B7A1966BF1F00806AEF /* RITMenuScrollViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -182,6 +191,15 @@
 			);
 			name = Images;
 			path = UpSliderMenu/Resources/Images;
+			sourceTree = "<group>";
+		};
+		3EBF1B7C1967104000806AEF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3EBF1B7D196710E900806AEF /* RITPageThumbView.h */,
+				3EBF1B7E196710E900806AEF /* RITPageThumbView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,9 +274,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EBF1B7B1966BF1F00806AEF /* RITMenuScrollViewController.m in Sources */,
 				3EA5776319644410007B967C /* RITViewController.m in Sources */,
 				3E73CFBC19643D6800A8F93C /* main.m in Sources */,
 				3EF0AB651966A6E9002E39DE /* RITPeekPagedScrollViewController.m in Sources */,
+				3EBF1B7F196710E900806AEF /* RITPageThumbView.m in Sources */,
 				A2A173EB1965CCF000DFD3E9 /* RITPagedScrollViewController.m in Sources */,
 				3E3797641965ACE900D0A198 /* RITCustomScrollViewController.m in Sources */,
 				3EA5775F196443CC007B967C /* RITAppDelegate.m in Sources */,
