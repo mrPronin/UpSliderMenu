@@ -10,16 +10,25 @@
 #import "RITPageThumbView.h"
 
 const NSInteger pageCount = 20;
+const CGFloat pageOffset = 5.f;
 
 @interface RITMenuScrollViewController ()
 
 @property (nonatomic, strong) NSMutableArray *pageViews;
-@property (assign, nonatomic) CGRect initialFrame;
+@property (assign, nonatomic) CGRect pageFrame;
+@property (assign, nonatomic) CGRect selectionZoneFrame;
+@property (assign, nonatomic) CGFloat contentMargin;
+@property (strong, nonatomic) RITPageThumbView *selectedPage;
 
-- (void)loadVisiblePages;
+- (NSArray*)loadVisiblePages;
 - (UIView*)loadPage:(NSInteger)page;
 - (void)purgePage:(NSInteger)page;
 - (NSArray*) getVisiblePagesWithContentOffset:(CGPoint) offset;
+- (NSInteger) pageWithView:(UIView*) page andArray:(NSArray*) pages;
+
+// RIT DEBUG
+@property (strong, nonatomic) UIView *selectionView;
+//RIT DEBUG
 
 @end
 
@@ -38,23 +47,37 @@ const NSInteger pageCount = 20;
 {
     [super viewDidLoad];
     
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapped:)];
+    [self.scrollView addGestureRecognizer:tapGesture];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
-    _initialFrame = CGRectMake(0, 0, 50, 50);
+    _pageFrame = CGRectMake(0, 0, 50, 50);
     
     // Set up the array to hold the views for each page
     self.pageViews = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i < pageCount; ++i) {
         [self.pageViews addObject:[NSNull null]];
     }
+    
+    // RIT DEBUG
+    _selectionView = [[UIView alloc] initWithFrame:self.selectionZoneFrame];
+    _selectionView.backgroundColor = [UIColor yellowColor];
+    [self.scrollView addSubview:_selectionView];
+    // RIT DEBUG
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    CGFloat pageWidth = _initialFrame.size.width;
+    //self.scrollView.contentOffset = CGPointMake(100, 0);
+    
+    CGFloat pageWidth = CGRectGetWidth(_pageFrame);
     // Set up the content size of the scroll view
     CGSize pagesScrollViewSize = self.scrollView.frame.size;
-    self.scrollView.contentSize = CGSizeMake(pageWidth * pageCount, pagesScrollViewSize.height);
+    
+    
+    _contentMargin = (pagesScrollViewSize.width - pageWidth) / 2;
+    self.scrollView.contentSize = CGSizeMake(pageWidth * pageCount + _contentMargin * 2, pagesScrollViewSize.height);
     
     // Load the initial set of pages that are on screen
     [self loadVisiblePages];
@@ -71,11 +94,12 @@ const NSInteger pageCount = 20;
 - (NSArray*) getVisiblePagesWithContentOffset:(CGPoint) offset
 {
     NSMutableArray *pages = [NSMutableArray array];
-    CGFloat pageWidth = _initialFrame.size.width;
+    CGFloat pageWidth = CGRectGetWidth(_pageFrame);
+    CGFloat pageScrollViewWidth = CGRectGetWidth(_scrollView.frame);
     
     // Determine number of hidden pages for left and right sides
-    CGFloat leftPagesCount = offset.x / pageWidth;
-    CGFloat rightPagesCount = (offset.x + self.scrollView.frame.size.width) / pageWidth;
+    CGFloat leftPagesCount = (offset.x - _contentMargin) / pageWidth;
+    CGFloat rightPagesCount = (offset.x - _contentMargin + pageScrollViewWidth) / pageWidth;
     
     // Work out which pages you want to load
     NSInteger firstPage = floor(leftPagesCount);
@@ -92,49 +116,48 @@ const NSInteger pageCount = 20;
     return pages;
 }
 
-- (void)loadVisiblePages {
+- (NSArray*)loadVisiblePages
+{
     // First, determine which page is currently visible
-    CGFloat pageWidth = _initialFrame.size.width;
-    //NSInteger page = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + pageWidth) / (pageWidth * 2.0f));
-    //NSInteger page = 0;
+    CGFloat pageWidth = CGRectGetWidth(_pageFrame);
+    CGFloat pageScrollViewWidth = CGRectGetWidth(_scrollView.frame);
     
     // Determine number of hidden pages for left and right sides
-    CGFloat leftPagesCount = self.scrollView.contentOffset.x / pageWidth;
-    CGFloat rightPagesCount = (self.scrollView.contentOffset.x + self.scrollView.frame.size.width) / pageWidth;
+    CGFloat leftPagesCount = (self.scrollView.contentOffset.x - _contentMargin) / pageWidth;
+    CGFloat rightPagesCount = (self.scrollView.contentOffset.x - _contentMargin + pageScrollViewWidth) / pageWidth;
     
     // Work out which pages you want to load
     NSInteger firstPage = floor(leftPagesCount);
     NSInteger lastPage = ceil(rightPagesCount) - 1;
     
-    // RIT DEBUG
-    //NSLog(@"left: %.2f, right: %.2f, first: %d, last: %d", leftPagesCount, rightPagesCount, firstPage, lastPage);
-    //NSLog(@"Page: %d, page width: %.0f, contentOffset: %@", page, pageWidth, NSStringFromCGPoint(self.scrollView.contentOffset));
-    //NSLog(@"page width: %.0f, offset: %0.f, page: %d, calc: %.2f", pageWidth, self.scrollView.contentOffset.x, page, (self.scrollView.contentOffset.x * 2.0f + pageWidth) / (pageWidth * 2.0f));
-    
-    /*
-    // load all pages
-    for (NSInteger i = 0; i < pageCount; i++) {
-        [self loadPage:i];
-    }
-    return;
-    */
-    // RIT DEBUG
-    
+    NSMutableArray *visiblePages = [NSMutableArray array];
     // Purge anything before the first page
     for (NSInteger i=0; i<firstPage; i++) {
+        
         [self purgePage:i];
+        
     }
     for (NSInteger i=firstPage; i<=lastPage; i++) {
-        [self loadPage:i];
+        
+        UIView *page = [self loadPage:i];
+        
+        if (page) {
+            
+            [visiblePages addObject:page];
+        }
+        
     }
     for (NSInteger i=lastPage+1; i<pageCount; i++) {
+        
         [self purgePage:i];
+        
     }
+    
+    return visiblePages;
 }
 
 - (UIView*)loadPage:(NSInteger)page
 {
-    
     if (page < 0 || page >= pageCount) {
         // If it's outside the range of what we have to display, then do nothing
         return nil;
@@ -143,10 +166,10 @@ const NSInteger pageCount = 20;
     // Load an individual page, first checking if you've already loaded it
     UIView *pageView = [self.pageViews objectAtIndex:page];
     if ((NSNull*)pageView == [NSNull null]) {
-        CGRect frame = _initialFrame;
-        frame.origin.x = frame.size.width * page;
+        CGRect frame = _pageFrame;
+        frame.origin.x = frame.size.width * page + _contentMargin;
         frame.origin.y = 0.0f;
-        frame = CGRectInset(frame, 5.0f, 5.0f);
+        frame = CGRectInset(frame, pageOffset, pageOffset);
         
         RITPageThumbView *newPageView = [[RITPageThumbView alloc] initWithFrame:frame andText:[NSString stringWithFormat:@"%02ld", (long)(page)]];
         
@@ -157,7 +180,8 @@ const NSInteger pageCount = 20;
     return pageView;
 }
 
-- (void)purgePage:(NSInteger)page {
+- (void)purgePage:(NSInteger)page
+{
     if (page < 0 || page >= pageCount) {
         // If it's outside the range of what you have to display, then do nothing
         return;
@@ -171,32 +195,116 @@ const NSInteger pageCount = 20;
     }
 }
 
+- (RITPageThumbView*) currentPageWithOffset:(CGPoint) offsetPoint andPages:(NSArray*) pages
+{
+    RITPageThumbView *currentPage = nil;
+    
+    CGFloat minDistance = _scrollView.contentSize.width;
+    CGFloat selectionMidX = CGRectGetMidX(self.selectionZoneFrame);
+    
+    for (RITPageThumbView *page in pages) {
+        
+        CGFloat pageMidX = CGRectGetMidX(page.frame);
+        CGFloat distance = fabs(selectionMidX - pageMidX);
+        if (distance < minDistance) {
+            
+            currentPage = page;
+            minDistance = distance;
+        }
+    }
+    
+    return currentPage;
+}
+
+- (void) setSelectedPage:(RITPageThumbView *)selectedPage
+{
+    
+    if (selectedPage == _selectedPage) {
+        return;
+    }
+    
+    if (self.selectedPage) {
+        
+        [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            
+            _selectedPage.backgroundColor = [UIColor blueColor];
+            _selectedPage.center = CGPointMake(_selectedPage.center.x, _selectedPage.center.y + pageOffset);
+            
+        } completion:nil];
+    }
+    _selectedPage = selectedPage;
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        
+        _selectedPage.backgroundColor = [UIColor lightGrayColor];
+        _selectedPage.center = CGPointMake(_selectedPage.center.x, _selectedPage.center.y - pageOffset);
+        
+    } completion:nil];
+}
+
+- (void) scrollToPage:(NSInteger) pageIndex
+{
+    
+    if (pageIndex < 0 || pageIndex >= pageCount) {
+        // If it's outside the range of what you have to display, then do nothing
+        return;
+    }
+    
+    UIView *page = [self loadPage:pageIndex];
+    
+    CGFloat pageWidth = CGRectGetWidth(_pageFrame);
+    CGFloat pageScrollViewWidth = CGRectGetWidth(_scrollView.frame);
+    CGPoint contentOffset = CGPointMake(CGRectGetMinX(page.frame) - (pageScrollViewWidth - pageWidth) / 2 - pageOffset, 0);
+    [self.scrollView setContentOffset:contentOffset animated:YES];
+    
+}
+
+- (CGRect) selectionZoneFrame
+{
+    
+    CGFloat pageWidth = CGRectGetWidth(_pageFrame);
+    CGFloat pageHeight = CGRectGetHeight(_pageFrame);
+    CGFloat pageScrollViewWidth = CGRectGetWidth(_scrollView.frame);
+    _selectionZoneFrame = CGRectMake(_scrollView.contentOffset.x + (pageScrollViewWidth - pageWidth) / 2, 0, pageWidth, pageHeight);
+    return _selectionZoneFrame;
+    
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // Load the pages that are now on screen
-    [self loadVisiblePages];
-}
-
-- (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    
-    NSLog(@"scrollViewWillBeginDragging contentOffset: %f", scrollView.contentOffset.x);
-    NSLog(@"\n");
+    NSArray *pages = [self loadVisiblePages];
+    RITPageThumbView *currentPage = [self currentPageWithOffset:self.scrollView.contentOffset andPages:pages];
+    self.selectedPage = currentPage;
+    //[self selectPage:currentPage];
+    //NSLog(@"views: %@", pages);
+    _selectionView.frame = self.selectionZoneFrame;
     
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
     
-    NSLog(@"scrollViewWillEndDragging contentOffset: %f", scrollView.contentOffset.x);
     CGPoint point = *targetContentOffset;
-    NSLog(@"velocity: %@, %f", NSStringFromCGPoint(velocity), point.x);
-    
     NSArray *array = [self getVisiblePagesWithContentOffset:point];
-    NSLog(@"views: %@", array);
-    NSLog(@"\n");
+    
+    UIView *currentView = [self currentPageWithOffset:point andPages:array];
+    
+    CGFloat pageWidth = CGRectGetWidth(_pageFrame);
+    CGFloat pageScrollViewWidth = CGRectGetWidth(_scrollView.frame);
+    point = CGPointMake(CGRectGetMinX(currentView.frame) - (pageScrollViewWidth - pageWidth) / 2 - pageOffset, 0);
+    *targetContentOffset = point;
 }
+
+/*
+ 
+ - (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView
+ {
+ 
+ NSLog(@"scrollViewWillBeginDragging contentOffset: %f", scrollView.contentOffset.x);
+ NSLog(@"\n");
+ 
+ }
 
 - (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
@@ -230,5 +338,40 @@ const NSInteger pageCount = 20;
     NSLog(@"\n");
     
 }
+*/
 
+#pragma mark - Actions
+
+- (void)scrollViewTapped:(UITapGestureRecognizer*)recognizer
+{
+    CGPoint pointInView = [recognizer locationInView:self.scrollView];
+    NSArray *pages = [self getVisiblePagesWithContentOffset:self.scrollView.contentOffset];
+    CGRect frame;
+    for (UIView *page in pages) {
+        
+        frame = page.frame;
+        frame = CGRectInset(frame, -pageOffset, -pageOffset);
+        if (!CGRectContainsPoint(frame, pointInView)) continue;
+        NSInteger pageIndex = [self pageWithView:page andArray:self.pageViews];
+        if (pageIndex == NSNotFound) return;
+        [self scrollToPage:pageIndex];
+        return;
+    }
+}
+
+- (NSInteger) pageWithView:(UIView*) page andArray:(NSArray*) pages
+{
+    
+    NSInteger index = NSNotFound;
+    
+    index = [pages indexOfObject:page];
+    
+    return index;
+}
+
+- (IBAction)actionScrollToPageButton:(UIButton *)sender {
+    
+    [self scrollToPage:15];
+    
+}
 @end

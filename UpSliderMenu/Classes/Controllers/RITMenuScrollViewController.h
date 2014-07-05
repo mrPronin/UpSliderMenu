@@ -12,4 +12,5 @@
 
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 
+- (IBAction)actionScrollToPageButton:(UIButton *)sender;
 @end
