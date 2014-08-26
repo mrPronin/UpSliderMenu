@@ -260,13 +260,11 @@ const CGFloat pageOffset = 5.f;
 
 - (CGRect) selectionZoneFrame
 {
-    
     CGFloat pageWidth = CGRectGetWidth(_pageFrame);
     CGFloat pageHeight = CGRectGetHeight(_pageFrame);
     CGFloat pageScrollViewWidth = CGRectGetWidth(_scrollView.frame);
     _selectionZoneFrame = CGRectMake(_scrollView.contentOffset.x + (pageScrollViewWidth - pageWidth) / 2, 0, pageWidth, pageHeight);
     return _selectionZoneFrame;
-    
 }
 
 #pragma mark - UIScrollViewDelegate

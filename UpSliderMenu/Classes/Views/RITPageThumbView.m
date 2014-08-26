@@ -46,16 +46,12 @@
 
 - (void) dealloc
 {
-    
     //NSLog(@"View deallocated: %@", _label.text);
-    
 }
 
 - (NSString*) description
 {
-    
     return [NSString stringWithFormat:@"%@ label=%@", [super description], _label.text];
-    
 }
 
 /*
