@@ -75,7 +75,7 @@
                         <sections>
                             <tableViewSection id="2hE-tD-TPy">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="GnD-yZ-EAg" style="IBUITableViewCellStyleDefault" id="W6Z-f6-N7f">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="GnD-yZ-EAg" style="IBUITableViewCellStyleDefault" id="W6Z-f6-N7f" userLabel="ImageScroll">
                                         <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W6Z-f6-N7f" id="LEZ-pb-C59">
@@ -95,7 +95,7 @@
                                             <segue destination="aPm-p0-mh0" kind="push" id="Lu0-EP-xZ4"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Ppu-eK-I8D" style="IBUITableViewCellStyleDefault" id="8Bj-fc-hzz">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Ppu-eK-I8D" style="IBUITableViewCellStyleDefault" id="8Bj-fc-hzz" userLabel="CustomViewScroll">
                                         <rect key="frame" x="0.0" y="108" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Bj-fc-hzz" id="11d-1U-Q2r">
@@ -115,7 +115,7 @@
                                             <segue destination="ov2-5X-jzb" kind="push" id="yid-cI-vTW"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="GpX-aV-2Yg" style="IBUITableViewCellStyleDefault" id="pdV-SI-uqb">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="GpX-aV-2Yg" style="IBUITableViewCellStyleDefault" id="pdV-SI-uqb" userLabel="Paged">
                                         <rect key="frame" x="0.0" y="152" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pdV-SI-uqb" id="JBV-av-x02">
@@ -135,7 +135,7 @@
                                             <segue destination="MUq-WD-xX6" kind="push" id="s8a-y7-K1B"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="0XY-5q-efE" style="IBUITableViewCellStyleDefault" id="qJ8-FJ-V2S">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="0XY-5q-efE" style="IBUITableViewCellStyleDefault" id="qJ8-FJ-V2S" userLabel="PagedWithPeeking">
                                         <rect key="frame" x="0.0" y="196" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qJ8-FJ-V2S" id="cDq-oB-fFd">
@@ -155,7 +155,7 @@
                                             <segue destination="trQ-6y-nRi" kind="push" id="lJ9-af-tpI"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="3mc-6F-S7P" style="IBUITableViewCellStyleDefault" id="ijy-MN-bHD">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="3mc-6F-S7P" style="IBUITableViewCellStyleDefault" id="ijy-MN-bHD" userLabel="MenuScrollView">
                                         <rect key="frame" x="0.0" y="240" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ijy-MN-bHD" id="tGN-kB-Dts">
@@ -173,6 +173,26 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="itK-bz-j16" kind="push" id="opN-zz-Xde"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ujx-JL-2v7" style="IBUITableViewCellStyleDefault" id="zaR-cb-lHx" userLabel="PagesNavigation">
+                                        <rect key="frame" x="0.0" y="284" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zaR-cb-lHx" id="YZd-aJ-EYI">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Pages navigation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ujx-JL-2v7">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="pPy-Yy-iM4" kind="push" id="fsb-Kf-dy5"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -306,6 +326,47 @@
             </objects>
             <point key="canvasLocation" x="1722" y="148"/>
         </scene>
+        <!--PagesNavigationViewController-->
+        <scene sceneID="XyZ-wh-5XJ">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="pPy-Yy-iM4" userLabel="PagesNavigationViewController" customClass="RITPagesNavigationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fjy-JH-Mmj"/>
+                        <viewControllerLayoutGuide type="bottom" id="IPy-KO-qji"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DFr-b4-A76">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_menu_up.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Oz-x0-MZI">
+                                <rect key="frame" x="0.0" y="271" width="320" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izd-RE-DLr" customClass="RITPagesNavigationScrollView">
+                                <rect key="frame" x="0.0" y="271" width="320" height="27"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="WKL-jy-owa"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Izd-RE-DLr" secondAttribute="trailing" id="8t7-Na-5es"/>
+                            <constraint firstItem="Izd-RE-DLr" firstAttribute="leading" secondItem="6Oz-x0-MZI" secondAttribute="leading" id="Ls0-xX-83y"/>
+                            <constraint firstItem="Izd-RE-DLr" firstAttribute="height" secondItem="6Oz-x0-MZI" secondAttribute="height" id="O6f-wt-jnb"/>
+                            <constraint firstItem="Izd-RE-DLr" firstAttribute="leading" secondItem="DFr-b4-A76" secondAttribute="leading" id="d6Y-3R-B7z"/>
+                            <constraint firstItem="Izd-RE-DLr" firstAttribute="width" secondItem="6Oz-x0-MZI" secondAttribute="width" id="ftF-B2-Wf4"/>
+                            <constraint firstItem="Izd-RE-DLr" firstAttribute="top" secondItem="6Oz-x0-MZI" secondAttribute="top" id="jwC-MA-5H6"/>
+                            <constraint firstAttribute="centerY" secondItem="Izd-RE-DLr" secondAttribute="centerY" id="wdv-dS-eKO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Yhi-zy-lYI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ahp-4B-mrn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2118" y="148"/>
+        </scene>
         <!--Custom Scroll View Controller-->
         <scene sceneID="BK9-C7-QD2">
             <objects>
@@ -356,6 +417,9 @@
             <point key="canvasLocation" x="651" y="153"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bg_menu_up.png" width="320" height="27"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
