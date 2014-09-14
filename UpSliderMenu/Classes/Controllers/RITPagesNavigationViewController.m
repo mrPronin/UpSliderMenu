@@ -79,18 +79,21 @@
 {
     NSLog(@"[%@ %@] -- ", [self class], NSStringFromSelector(_cmd));
 }
+ */
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     NSLog(@"[%@ %@] -- ", [self class], NSStringFromSelector(_cmd));
-    
+    [_scrollView reloadData];
+    /*
     if (fromInterfaceOrientation == UIDeviceOrientationPortrait) {
         CGRect scrollViewFrame = _scrollView.frame;
         scrollViewFrame.size.height = 100;
         _scrollView.frame = scrollViewFrame;
         [_scrollView setNeedsDisplay];
     }
+    */
+    
 }
-*/
 
 @end
