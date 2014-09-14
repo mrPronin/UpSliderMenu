@@ -7,7 +7,7 @@
 //
 
 #import "RITMenuScrollViewController.h"
-#import "RITPageThumbView.h"
+#import "RITPage.h"
 
 const NSInteger pageCount = 20;
 const CGFloat pageOffset = 5.f;
@@ -18,7 +18,7 @@ const CGFloat pageOffset = 5.f;
 @property (assign, nonatomic) CGRect pageFrame;
 @property (assign, nonatomic) CGRect selectionZoneFrame;
 @property (assign, nonatomic) CGFloat contentMargin;
-@property (strong, nonatomic) RITPageThumbView *selectedPage;
+@property (strong, nonatomic) RITPage *selectedPage;
 
 - (NSArray*)loadVisiblePages;
 - (UIView*)loadPage:(NSInteger)page;
@@ -106,7 +106,7 @@ const CGFloat pageOffset = 5.f;
     NSInteger lastPage = ceil(rightPagesCount) - 1;
     for (NSInteger i=firstPage; i<=lastPage; i++) {
         
-        RITPageThumbView *pageView = (RITPageThumbView*)[self loadPage:i];
+        RITPage *pageView = (RITPage *)[self loadPage:i];
         if (pageView) {
             
             [pages addObject:pageView];
@@ -171,7 +171,7 @@ const CGFloat pageOffset = 5.f;
         frame.origin.y = 0.0f;
         frame = CGRectInset(frame, pageOffset, pageOffset);
         
-        RITPageThumbView *newPageView = [[RITPageThumbView alloc] initWithFrame:frame andText:[NSString stringWithFormat:@"%02ld", (long)(page)]];
+        RITPage *newPageView = [[RITPage alloc] initWithFrame:frame andText:[NSString stringWithFormat:@"%02ld", (long)(page)]];
         
         [self.scrollView addSubview:newPageView];
         [self.pageViews replaceObjectAtIndex:page withObject:newPageView];
@@ -195,14 +195,14 @@ const CGFloat pageOffset = 5.f;
     }
 }
 
-- (RITPageThumbView*) currentPageWithOffset:(CGPoint) offsetPoint andPages:(NSArray*) pages
+- (RITPage*) currentPageWithOffset:(CGPoint) offsetPoint andPages:(NSArray*) pages
 {
-    RITPageThumbView *currentPage = nil;
+    RITPage *currentPage = nil;
     
     CGFloat minDistance = _scrollView.contentSize.width;
     CGFloat selectionMidX = CGRectGetMidX(self.selectionZoneFrame);
     
-    for (RITPageThumbView *page in pages) {
+    for (RITPage *page in pages) {
         
         CGFloat pageMidX = CGRectGetMidX(page.frame);
         CGFloat distance = fabs(selectionMidX - pageMidX);
@@ -216,7 +216,7 @@ const CGFloat pageOffset = 5.f;
     return currentPage;
 }
 
-- (void) setSelectedPage:(RITPageThumbView *)selectedPage
+- (void) setSelectedPage:(RITPage *)selectedPage
 {
     
     if (selectedPage == _selectedPage) {
@@ -272,7 +272,7 @@ const CGFloat pageOffset = 5.f;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // Load the pages that are now on screen
     NSArray *pages = [self loadVisiblePages];
-    RITPageThumbView *currentPage = [self currentPageWithOffset:self.scrollView.contentOffset andPages:pages];
+    RITPage *currentPage = [self currentPageWithOffset:self.scrollView.contentOffset andPages:pages];
     self.selectedPage = currentPage;
     //[self selectPage:currentPage];
     //NSLog(@"views: %@", pages);

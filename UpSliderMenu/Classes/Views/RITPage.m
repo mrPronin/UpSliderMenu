@@ -1,25 +1,45 @@
 //
-//  RITPageThumbView.m
+//  RITPage.m
 //  UpSliderMenu
 //
 //  Created by Aleksandr Pronin on 04.07.14.
 //  Copyright (c) 2014 Aleksandr Pronin. All rights reserved.
 //
 
-#import "RITPageThumbView.h"
+#import "RITPage.h"
 
-@interface RITPageThumbView ()
+@interface RITPage ()
 
 @property (strong, nonatomic) UILabel *label;
 
 @end
 
-@implementation RITPageThumbView
+@implementation RITPage
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame text:(NSString *)text andReuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        self.backgroundColor = [UIColor blueColor];
+        
+        _label = [[UILabel alloc] init];
+        _label.frame = self.bounds;
+        _label.text = text;
+        _label.textColor = [UIColor whiteColor];
+        _label.textAlignment = NSTextAlignmentCenter;
+        _label.adjustsFontSizeToFitWidth = YES;
+        [self addSubview:_label];
+        _reuseIdentifier = reuseIdentifier;
         
     }
     return self;

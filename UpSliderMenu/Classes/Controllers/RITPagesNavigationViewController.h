@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RITPagesNavigation.h"
 
-@interface RITPagesNavigationViewController : UIViewController
+@interface RITPagesNavigationViewController : UIViewController <RITPagesNavigationDelegate, RITPagesNavigationDataSource>
+
+@property (weak, nonatomic) IBOutlet RITPagesNavigation *scrollView;
 
 @end

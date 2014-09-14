@@ -26,7 +26,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    _scrollView.delegate = self;
+    _scrollView.dataSource = self;
+    _scrollView.pageSize = CGSizeMake(12.f, 15.f);
+    [_scrollView reloadData];
+    //_scrollView.horizontalPageOffset = 1.f;
+    //_scrollView.pageImage = [UIImage imageNamed:@"pages"];
+    //NSLog(@"[%@ %@] -- ", [self class], NSStringFromSelector(_cmd));
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,14 +42,54 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark -
+#pragma mark RITPagesNavigationDelegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)pagesNavigation:(RITPagesNavigation *)pagesNavigation tapOnPageWithIndex:(NSUInteger)pageIndex
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+}
+
+#pragma mark -
+#pragma mark RITPagesNavigationDataSource
+
+- (RITPage *)pagesNavigation:(RITPagesNavigation *)pagesNavigation pageAtIndex:(NSUInteger)pageIndex
+{
+    NSString* reuseIdentifier = [NSString stringWithFormat:@"Page%02d", pageIndex];
+    RITPage* page = [_scrollView  dequeueReusablePageWithIdentifier:reuseIdentifier];
+    if (!page)
+    {
+        /*
+        CGRect pageFrame = CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
+        page = [RITPage alloc] initWithFrame:<#(CGRect)#> text:<#(NSString *)#> andReuseIdentifier:<#(NSString *)#>;
+        page.verticalOffset = (CGRectGetHeight(_scrollView.frame) - _scrollView.pageSize.height)/2;
+        */
+    }
+    
+    return nil;
+}
+
+- (NSUInteger)numberOfPagesForPagesNavigation:(RITPagesNavigation *)pagesNavigation
+{
+    return 53;
+}
+
+/*
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    NSLog(@"[%@ %@] -- ", [self class], NSStringFromSelector(_cmd));
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    NSLog(@"[%@ %@] -- ", [self class], NSStringFromSelector(_cmd));
+    
+    if (fromInterfaceOrientation == UIDeviceOrientationPortrait) {
+        CGRect scrollViewFrame = _scrollView.frame;
+        scrollViewFrame.size.height = 100;
+        _scrollView.frame = scrollViewFrame;
+        [_scrollView setNeedsDisplay];
+    }
 }
 */
 
