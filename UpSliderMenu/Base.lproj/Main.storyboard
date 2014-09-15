@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="m1C-GN-dgZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="m1C-GN-dgZ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -339,16 +339,23 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_menu_up.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Oz-x0-MZI">
-                                <rect key="frame" x="0.0" y="271" width="320" height="27"/>
+                                <rect key="frame" x="0.0" y="273" width="320" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izd-RE-DLr" customClass="RITPagesNavigation">
-                                <rect key="frame" x="0.0" y="271" width="320" height="27"/>
+                                <rect key="frame" x="0.0" y="273" width="320" height="22"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="WKL-jy-owa"/>
+                                    <constraint firstAttribute="height" constant="22" id="WKL-jy-owa"/>
                                 </constraints>
                             </scrollView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djg-sJ-Ucm" userLabel="pageNumberLabel">
+                                <rect key="frame" x="0.0" y="217" width="320" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -357,12 +364,16 @@
                             <constraint firstItem="Izd-RE-DLr" firstAttribute="height" secondItem="6Oz-x0-MZI" secondAttribute="height" id="O6f-wt-jnb"/>
                             <constraint firstItem="Izd-RE-DLr" firstAttribute="leading" secondItem="DFr-b4-A76" secondAttribute="leading" id="d6Y-3R-B7z"/>
                             <constraint firstItem="Izd-RE-DLr" firstAttribute="width" secondItem="6Oz-x0-MZI" secondAttribute="width" id="ftF-B2-Wf4"/>
+                            <constraint firstItem="Djg-sJ-Ucm" firstAttribute="leading" secondItem="DFr-b4-A76" secondAttribute="leading" id="iy2-Ie-9DT"/>
                             <constraint firstItem="Izd-RE-DLr" firstAttribute="top" secondItem="6Oz-x0-MZI" secondAttribute="top" id="jwC-MA-5H6"/>
+                            <constraint firstAttribute="trailing" secondItem="Djg-sJ-Ucm" secondAttribute="trailing" id="lb4-I9-8KL"/>
+                            <constraint firstItem="Izd-RE-DLr" firstAttribute="top" secondItem="Djg-sJ-Ucm" secondAttribute="bottom" constant="35" id="vtq-F6-zPg"/>
                             <constraint firstAttribute="centerY" secondItem="Izd-RE-DLr" secondAttribute="centerY" id="wdv-dS-eKO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Yhi-zy-lYI"/>
                     <connections>
+                        <outlet property="pageNumberLabel" destination="Djg-sJ-Ucm" id="tid-Pg-oRe"/>
                         <outlet property="scrollView" destination="Izd-RE-DLr" id="ah5-lJ-NwT"/>
                     </connections>
                 </viewController>

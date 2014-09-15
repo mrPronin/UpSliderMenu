@@ -12,5 +12,6 @@
 @interface RITPagesNavigationViewController : UIViewController <RITPagesNavigationDelegate, RITPagesNavigationDataSource>
 
 @property (weak, nonatomic) IBOutlet RITPagesNavigation *scrollView;
+@property (weak, nonatomic) IBOutlet UILabel *pageNumberLabel;
 
 @end

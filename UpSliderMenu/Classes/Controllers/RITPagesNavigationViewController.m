@@ -8,7 +8,12 @@
 
 #import "RITPagesNavigationViewController.h"
 
+const NSUInteger pageNumber = 53;
+
 @interface RITPagesNavigationViewController ()
+
+@property (strong, nonatomic) UIImage *pageImage;
+@property (assign, nonatomic) CGFloat horizontalOffset;
 
 @end
 
@@ -27,12 +32,17 @@
 {
     [super viewDidLoad];
     
+    _horizontalOffset = 2.f;
+    _pageImage = [UIImage imageNamed:@"pages"];
+    CGSize imageSize = _pageImage.size;
+    
     _scrollView.delegate = self;
     _scrollView.dataSource = self;
-    _scrollView.pageSize = CGSizeMake(12.f, 15.f);
+    // RIT DEBUG
+    _scrollView.pageSize = CGSizeMake(imageSize.width + _horizontalOffset*2, CGRectGetHeight(_scrollView.frame));
+    //_scrollView.pageSize = CGSizeMake(50, CGRectGetHeight(_scrollView.frame));
+    // RIT DEBUG
     [_scrollView reloadData];
-    //_scrollView.horizontalPageOffset = 1.f;
-    //_scrollView.pageImage = [UIImage imageNamed:@"pages"];
     //NSLog(@"[%@ %@] -- ", [self class], NSStringFromSelector(_cmd));
 }
 
@@ -50,6 +60,12 @@
     
 }
 
+- (void)pagesNavigation:(RITPagesNavigation *)pagesNavigation currentPageDidChange:(NSUInteger)pageIndex
+{
+    //NSLog(@"[%@ %@] -- page: %d", [self class], NSStringFromSelector(_cmd), pageIndex);
+    _pageNumberLabel.text = [NSString stringWithFormat:@"%d/%d", pageIndex + 1, pageNumber];
+}
+
 #pragma mark -
 #pragma mark RITPagesNavigationDataSource
 
@@ -59,19 +75,20 @@
     RITPage* page = [_scrollView  dequeueReusablePageWithIdentifier:reuseIdentifier];
     if (!page)
     {
-        /*
-        CGRect pageFrame = CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
-        page = [RITPage alloc] initWithFrame:<#(CGRect)#> text:<#(NSString *)#> andReuseIdentifier:<#(NSString *)#>;
-        page.verticalOffset = (CGRectGetHeight(_scrollView.frame) - _scrollView.pageSize.height)/2;
-        */
+        CGSize imageSize = _pageImage.size;
+        CGFloat verticalOffset = (CGRectGetHeight(_scrollView.frame) - imageSize.height)*0.7f;
+        CGSize offset = CGSizeMake(_horizontalOffset, verticalOffset);
+        //NSString *text = [NSString stringWithFormat:@"%02d", pageIndex];
+        page = [[RITPage alloc] initWithReuseIdentifier:reuseIdentifier offset:offset andImage:_pageImage];;
     }
     
-    return nil;
+    //NSLog(@"[%@ %@] -- page: %@", [self class], NSStringFromSelector(_cmd), page);
+    return page;
 }
 
 - (NSUInteger)numberOfPagesForPagesNavigation:(RITPagesNavigation *)pagesNavigation
 {
-    return 53;
+    return pageNumber;
 }
 
 /*

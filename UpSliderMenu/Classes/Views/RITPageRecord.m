@@ -10,4 +10,9 @@
 
 @implementation RITPageRecord
 
+- (NSString*) description
+{
+    return [NSString stringWithFormat:@"startPosition: %f width: %f cachedPage: %@", _startPosition, _width, _cachedPage];
+}
+
 @end

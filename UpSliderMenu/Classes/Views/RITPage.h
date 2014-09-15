@@ -10,11 +10,10 @@
 
 @interface RITPage : UIView
 
-- (id)initWithFrame:(CGRect)frame text:(NSString *)text andReuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier offset:(CGSize)offset andImage:(UIImage *)image;
 - (id)initWithFrame:(CGRect)frame andText:(NSString*) text;
 
 @property (strong, nonatomic) NSString *reuseIdentifier;
-@property (assign, nonatomic) CGFloat verticalOffset;
-@property (assign, nonatomic) CGFloat horizontalOffset;
+@property (assign, nonatomic) CGSize offset;
 
 @end

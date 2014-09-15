@@ -16,6 +16,7 @@
 
 @implementation RITPage
 
+/*
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -24,23 +25,24 @@
     }
     return self;
 }
+*/
 
-- (id)initWithFrame:(CGRect)frame text:(NSString *)text andReuseIdentifier:(NSString *)reuseIdentifier
+
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier offset:(CGSize)offset andImage:(UIImage *)image
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame: CGRectZero];
     if (self) {
         
-        self.backgroundColor = [UIColor blueColor];
+        self.backgroundColor = [UIColor clearColor];
+        //self.backgroundColor = [self randomColor];
         
-        _label = [[UILabel alloc] init];
-        _label.frame = self.bounds;
-        _label.text = text;
-        _label.textColor = [UIColor whiteColor];
-        _label.textAlignment = NSTextAlignmentCenter;
-        _label.adjustsFontSizeToFitWidth = YES;
-        [self addSubview:_label];
+        CGRect imageFrame = CGRectMake(ceilf(offset.width), ceilf(offset.height), image.size.width, image.size.height);
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        imageView.frame = imageFrame;
+        [self addSubview:imageView];
+        
         _reuseIdentifier = reuseIdentifier;
-        
+        _offset = offset;
     }
     return self;
 }
@@ -50,7 +52,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor blueColor];
+        //self.backgroundColor = [UIColor blueColor];
+        self.backgroundColor = [self randomColor];
         
         _label = [[UILabel alloc] init];
         _label.frame = self.bounds;
@@ -64,6 +67,14 @@
     return self;
 }
 
+- (UIColor*) randomColor {
+    
+    CGFloat r = (float)(arc4random() % 256) / 255.f;
+    CGFloat g = (float)(arc4random() % 256) / 255.f;
+    CGFloat b = (float)(arc4random() % 256) / 255.f;
+    return [UIColor colorWithRed:r green:g blue:b alpha:1.f];
+}
+
 - (void) dealloc
 {
     //NSLog(@"View deallocated: %@", _label.text);
@@ -71,16 +82,7 @@
 
 - (NSString*) description
 {
-    return [NSString stringWithFormat:@"%@ label=%@", [super description], _label.text];
+    return [NSString stringWithFormat:@"reuseIdentifier: %@ label: %@ frame: %@", _reuseIdentifier, _label.text, NSStringFromCGRect(self.frame)];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

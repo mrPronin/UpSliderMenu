@@ -14,12 +14,15 @@
 @property (strong, nonatomic) NSMutableSet* reusePool;
 @property (strong, nonatomic) NSMutableArray* pageRecords;
 @property (strong, nonatomic) NSMutableIndexSet* visiblePages;
+@property (strong, nonatomic) RITPage *selectedPage;
+@property (assign, nonatomic) CGRect selectionZoneFrame;
+// RIT DEBUG
+//@property (strong, nonatomic) UIView *selectionView;
+//RIT DEBUG
 
 @end
 
 @implementation RITPagesNavigation {
-    //CGRect _pageBounds;
-    //CGFloat _verticalPageOffset;
     NSUInteger _pagesCount;
     CGFloat _contentMargin;
     id<RITPagesNavigationDelegate> _pagesNavigationDelegate;
@@ -32,6 +35,7 @@
     struct {
         // RITPagesNavigationDelegate
         unsigned tapOnPageWithIndex : 1;
+        unsigned currentPageDidChange : 1;
         
         // UIScrollViewDelegate
         unsigned scrollViewDidScroll : 1;
@@ -73,20 +77,16 @@
 - (void)reloadData
 {
     // RIT DEBUG
-    NSLog(@"[%@ %@] _dataSource: %@", [self class], NSStringFromSelector(_cmd), _dataSource);
+    //NSLog(@"[%@ %@] _dataSource: %@", [self class], NSStringFromSelector(_cmd), _dataSource);
     // RIT DEBUG
     
     if (!_dataSource) return;
     _pagesCount = _dataSourceHas.numberOfPagesForPagesNavigation ?[_dataSource numberOfPagesForPagesNavigation:self] : 0;
     
     [self returnNonVisiblePagesToThePool:nil];
-    [self generateWidthAndOffsetData];
     [self setContentSize];
+    [self generateWidthAndOffsetData];
     [self layoutPageViews];
-    
-    
-    //[self updateVisibleBars];
-    //[self setNeedsLayout];
 }
 
 - (RITPage *)dequeueReusablePageWithIdentifier:(NSString *)reuseIdentifier
@@ -115,24 +115,6 @@
 #pragma mark -
 #pragma mark Layout methods
 
-- (NSInteger)findPageIndexForOffset:(CGFloat)xPosition inRange:(NSRange)range
-{
-    if ([[self pageRecords] count] == 0) return 0;
-    
-    RITPageRecord* pageRecord = [[RITPageRecord alloc] init];
-    [pageRecord setStartPosition: xPosition];
-    
-    NSInteger returnValue = [[self pageRecords] indexOfObject: pageRecord
-                                               inSortedRange: NSMakeRange(0, [[self pageRecords] count])
-                                                     options: NSBinarySearchingInsertionIndex
-                                             usingComparator: ^NSComparisonResult(RITPageRecord* pageRecord1, RITPageRecord* pageRecord2){
-                                                 if ([pageRecord1 startPosition] < [pageRecord2 startPosition]) return NSOrderedAscending;
-                                                 return NSOrderedDescending;
-                                             }];
-    if (returnValue == 0) return 0;
-    return returnValue - 1;
-}
-
 - (void)layoutPageViews
 {
     // RIT DEBUG
@@ -142,6 +124,14 @@
     CGFloat currentEndX = currentStartX + [self frame].size.width;
     
     NSInteger pageIndexToDisplay = [self findPageIndexForOffset: currentStartX inRange: NSMakeRange(0, [[self pageRecords] count])];
+    BOOL initialSelection = NO;
+    if (pageIndexToDisplay == 0)
+    {
+        initialSelection = YES;
+    }
+    // RIT DEBUG
+    //NSLog(@"pageIndexToDisplay: %d", pageIndexToDisplay);
+    // RIT DEBUG
     NSMutableIndexSet* newVisiblePages = [[NSMutableIndexSet alloc] init];
     
     CGFloat xOrigin;
@@ -162,19 +152,50 @@
             [page setFrame:CGRectMake(xOrigin, 0, pageWidth, CGRectGetHeight(self.bounds))];
             [self addSubview:page];
         }
-        
+        // RIT DEBUG
+        //NSLog(@"page: %@", page);
+        // RIT DEBUG
         pageIndexToDisplay++;
     }
     while (xOrigin + pageWidth < currentEndX && pageIndexToDisplay < [[self pageRecords] count]);
     
-    NSLog(@"laying out %lu pages", (unsigned long)[newVisiblePages count]);
+    if (initialSelection)
+    {
+        RITPage* page = [self cachedPageForIndex:0];
+        if (CGRectIntersectsRect(page.frame, [self selectionZoneFrame])) {
+            self.selectedPage = page;
+        }
+    }
+    
+    // RIT DEBUG
+    //NSLog(@"newVisiblePages: %@", newVisiblePages);
+    //NSLog(@"laying out %lu pages", (unsigned long)[newVisiblePages count]);
+    // RIT DEBUG
     
     [self returnNonVisiblePagesToThePool:newVisiblePages];
 }
 
+- (NSInteger)findPageIndexForOffset:(CGFloat)xPosition inRange:(NSRange)range
+{
+    if ([[self pageRecords] count] == 0) return 0;
+    
+    RITPageRecord* pageRecord = [[RITPageRecord alloc] init];
+    [pageRecord setStartPosition: xPosition];
+    
+    NSInteger returnValue = [[self pageRecords] indexOfObject: pageRecord
+                                               inSortedRange: NSMakeRange(0, [[self pageRecords] count])
+                                                     options: NSBinarySearchingInsertionIndex
+                                             usingComparator: ^NSComparisonResult(RITPageRecord* pageRecord1, RITPageRecord* pageRecord2){
+                                                 if ([pageRecord1 startPosition] < [pageRecord2 startPosition]) return NSOrderedAscending;
+                                                 return NSOrderedDescending;
+                                             }];
+    if (returnValue == 0) return 0;
+    return returnValue - 1;
+}
+
 - (void)generateWidthAndOffsetData
 {
-    CGFloat currentOffsetX = 0.0;
+    CGFloat currentOffsetX = _contentMargin;
     NSMutableArray* newPageRecords = [NSMutableArray array];
     
     for (NSInteger pageIndex = 0; pageIndex < _pagesCount; pageIndex++)
@@ -200,6 +221,20 @@
 {
     self.backgroundColor = [UIColor clearColor];
     _pagesCount = 20;
+    _animationOffsetRatio = 0.4f;
+    _animationDuration = 0.3;
+    [super setDelegate:self];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapped:)];
+    [self addGestureRecognizer:tapGesture];
+    
+    // RIT DEBUG
+    /*
+    _selectionView = [[UIView alloc] initWithFrame:self.selectionZoneFrame];
+    _selectionView.backgroundColor = [UIColor yellowColor];
+    [self addSubview:_selectionView];
+    */
+    // RIT DEBUG
     
     /*
     _horizontalPageOffset = 1.f;
@@ -207,6 +242,22 @@
     CGSize initialThumbSize = CGSizeMake(CGRectGetHeight(self.bounds) - _horizontalPageOffset*2, CGRectGetHeight(self.bounds));
     [self updatePageBoundsWithPageSize:initialThumbSize andViewSize:self.bounds.size];
     */
+}
+
+- (void)scrollViewTapped:(UITapGestureRecognizer*)recognizer
+{
+    CGPoint pointInView = [recognizer locationInView:self];
+    NSInteger pageIndexToDisplay = [self findPageIndexForOffset: pointInView.x inRange: NSMakeRange(0, [[self pageRecords] count])];
+    [self scrollToPage:pageIndexToDisplay];
+}
+
+- (void)scrollToPage:(NSInteger)pageIndex
+{
+    CGFloat pageWidth = _pageSize.width;
+    CGFloat pageScrollViewWidth = CGRectGetWidth(self.frame);
+    CGFloat startPosition = [self startPositionForPage:pageIndex];
+    CGPoint contentOffset = CGPointMake(startPosition - (pageScrollViewWidth - pageWidth) / 2, 0);
+    [self setContentOffset:contentOffset animated:YES];
 }
 
 /*
@@ -222,13 +273,6 @@
 }
 */
 
-- (void)updateVisibleBars
-{
-    // RIT DEBUG
-    //NSLog(@"[%@ %@]", [self class], NSStringFromSelector(_cmd));
-    // RIT DEBUG
-}
-
 - (void)setContentSize
 {
     // RIT DEBUG
@@ -242,6 +286,9 @@
 
 - (void)returnNonVisiblePagesToThePool:(NSMutableIndexSet*)currentVisiblePages
 {
+    // RIT DEBUG
+    //NSLog(@"[%@ %@] -- currentVisiblePages: %@", [self class], NSStringFromSelector(_cmd), currentVisiblePages);
+    // RIT DEBUG
     [[self visiblePages] removeIndexes: currentVisiblePages];
     [[self visiblePages] enumerateIndexesUsingBlock:^(NSUInteger pageIndex, BOOL *stop)
      {
@@ -250,18 +297,22 @@
          {
              [[self reusePool] addObject: page];
              [page removeFromSuperview];
-             [self setCachedPage:page forIndex:pageIndex];
+             [self setCachedPage:nil forIndex:pageIndex];
          }
      }];
+    // RIT DEBUG
+    //NSLog(@"reusePool: %@", _reusePool);
+    // RIT DEBUG
     [self setVisiblePages: currentVisiblePages];
 }
 
 #pragma mark -
 #pragma mark Convenience methods for accessing page records
 
-- (CGFloat)startPositionForPage:(NSInteger)page
+- (CGFloat)startPositionForPage:(NSInteger)pageIndex
 {
-    return [(RITPageRecord *)[[self pageRecords] objectAtIndex: page] startPosition];
+    RITPageRecord *pageRecord = [[self pageRecords] objectAtIndex:pageIndex];
+    return pageRecord.startPosition;
 }
 
 - (CGFloat)widthForPage:(NSInteger)page
@@ -274,7 +325,7 @@
     return [(RITPageRecord *)[[self pageRecords] objectAtIndex:pageIndex] cachedPage];
 }
 
-- (void) setCachedPage:(RITPage *)page forIndex:(NSInteger)pageIndex
+- (void)setCachedPage:(RITPage *)page forIndex:(NSInteger)pageIndex
 {
     [(RITPageRecord *)[[self pageRecords] objectAtIndex: pageIndex] setCachedPage:page];
 }
@@ -292,10 +343,14 @@
 
 - (void)setDelegate:(id<RITPagesNavigationDelegate>)newDelegate
 {
+    // RIT DEBUG
+    //NSLog(@"[%@ %@] -- newDelegate: %@", [self class], NSStringFromSelector(_cmd), newDelegate);
+    // RIT DEBUG
     _pagesNavigationDelegate = newDelegate;
     
     // RITPagesNavigationDelegate protocol methods
     _delegateHas.tapOnPageWithIndex = [newDelegate respondsToSelector:@selector(pagesNavigation:tapOnPageWithIndex:)];
+    _delegateHas.currentPageDidChange = [newDelegate respondsToSelector:@selector(pagesNavigation:currentPageDidChange:)];
     
     // UIScrollViewDelegate protocol methods
     _delegateHas.scrollViewDidScroll = [newDelegate respondsToSelector:@selector(scrollViewDidScroll:)];
@@ -327,7 +382,9 @@
 
 - (void)setPageSize:(CGSize)newSize
 {
-    NSLog(@"[%@ %@] -- newPageThumbViewSize: %@", [self class], NSStringFromSelector(_cmd), NSStringFromCGSize(newSize));
+    // RIT DEBUG
+    //NSLog(@"[%@ %@] -- newSize: %@", [self class], NSStringFromSelector(_cmd), NSStringFromCGSize(newSize));
+    // RIT DEBUG
     if (CGSizeEqualToSize(_pageSize, newSize)) return;
     _pageSize = newSize;
     //[self updatePageBoundsWithPageSize:newSize andViewSize:self.bounds.size];
@@ -374,6 +431,48 @@
     return _visiblePages;
 }
 
+- (void) setSelectedPage:(RITPage *)newSelectedPage
+{
+    // RIT DEBUG
+    //NSLog(@"[%@ %@] --", [self class], NSStringFromSelector(_cmd));
+    // RIT DEBUG
+    if (newSelectedPage == _selectedPage) return;
+    
+    //CGFloat animationOffset = ceilf(self.selectedPage.offset.height)*0.5f;
+    
+    if (_selectedPage) {
+        
+        [UIView animateWithDuration:_animationDuration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            
+            //_selectedPage.backgroundColor = [UIColor blueColor];
+            _selectedPage.center = CGPointMake(_selectedPage.center.x, _selectedPage.center.y + ceilf(_selectedPage.offset.height*_animationOffsetRatio));
+            
+        } completion:nil];
+    }
+    _selectedPage = newSelectedPage;
+    [UIView animateWithDuration:_animationDuration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        
+        //_selectedPage.backgroundColor = [UIColor lightGrayColor];
+        _selectedPage.center = CGPointMake(_selectedPage.center.x, _selectedPage.center.y - ceilf(_selectedPage.offset.height*_animationOffsetRatio));
+        
+    } completion:nil];
+    if (_delegateHas.currentPageDidChange)
+    {
+        CGFloat startPosition = CGRectGetMinX(newSelectedPage.frame) + 1;
+        NSInteger pageIndex = [self findPageIndexForOffset: startPosition inRange: NSMakeRange(0, [[self pageRecords] count])];
+        [_pagesNavigationDelegate pagesNavigation:self currentPageDidChange:pageIndex];
+    }
+}
+
+- (CGRect)selectionZoneFrame
+{
+    CGFloat pageWidth = _pageSize.width;
+    CGFloat pageHeight = _pageSize.height;
+    CGFloat pageScrollViewWidth = CGRectGetWidth(self.frame);
+    _selectionZoneFrame = CGRectMake(self.contentOffset.x + (pageScrollViewWidth - pageWidth) / 2, 0, pageWidth, pageHeight);
+    return _selectionZoneFrame;
+}
+
 #pragma mark -
 #pragma mark UIScrollViewDelegate
 
@@ -385,9 +484,42 @@
     
     [self layoutPageViews];
     
+    CGFloat currentStartX = [self contentOffset].x + _contentMargin + 1;
+    NSInteger selectedPageIndex = [self findPageIndexForOffset: currentStartX inRange: NSMakeRange(0, [[self pageRecords] count])];
+    // RIT DEBUG
+    /*
+    _selectionView.frame = self.selectionZoneFrame;
+    [self bringSubviewToFront:_selectionView];
+    */
+    //NSLog(@"pageIndexToDisplay: %d", selectedPageIndex);
+    // RIT DEBUG
+    self.selectedPage = [self cachedPageForIndex:selectedPageIndex];
+    
     if (_delegateHas.scrollViewDidScroll) {
         
         [_pagesNavigationDelegate scrollViewDidScroll:self];
+    }
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    // RIT DEBUG
+    //NSLog(@"[%@ %@] -- targetContentOffset: %@", [self class], NSStringFromSelector(_cmd), NSStringFromCGPoint(*targetContentOffset));
+    // RIT DEBUG
+    CGPoint point = *targetContentOffset;
+    
+    CGFloat targetStartX = point.x + _contentMargin + 1;
+    NSInteger targetPageIndex = [self findPageIndexForOffset: targetStartX inRange: NSMakeRange(0, [[self pageRecords] count])];
+    CGFloat startPosition = [self startPositionForPage:targetPageIndex];
+    
+    CGFloat pageWidth = _pageSize.width;
+    CGFloat pageScrollViewWidth = CGRectGetWidth(self.frame);
+    point = CGPointMake(startPosition - (pageScrollViewWidth - pageWidth) / 2, 0);
+    *targetContentOffset = point;
+    
+    if (_delegateHas.scrollViewWillEndDragging) {
+        
+        [_pagesNavigationDelegate scrollViewWillEndDragging:self withVelocity:velocity targetContentOffset:targetContentOffset];
     }
 }
 
@@ -448,18 +580,6 @@
     if (_delegateHas.scrollViewDidEndDecelerating) {
         
         [_pagesNavigationDelegate scrollViewDidEndDecelerating:self];
-    }
-}
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-    // RIT DEBUG
-    //NSLog(@"[%@ %@] -- targetContentOffset: %@", [self class], NSStringFromSelector(_cmd), NSStringFromCGPoint(*targetContentOffset));
-    // RIT DEBUG
-    
-    if (_delegateHas.scrollViewWillEndDragging) {
-        
-        [_pagesNavigationDelegate scrollViewWillEndDragging:self withVelocity:velocity targetContentOffset:targetContentOffset];
     }
 }
 

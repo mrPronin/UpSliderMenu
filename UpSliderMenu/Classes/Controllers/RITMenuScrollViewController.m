@@ -195,7 +195,7 @@ const CGFloat pageOffset = 5.f;
     }
 }
 
-- (RITPage*) currentPageWithOffset:(CGPoint) offsetPoint andPages:(NSArray*) pages
+- (RITPage*)currentPageWithOffset:(CGPoint)offsetPoint andPages:(NSArray*)pages
 {
     RITPage *currentPage = nil;
     
